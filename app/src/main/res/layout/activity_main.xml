@@ -24,4 +24,12 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <TextView
+        android:id="@+id/empty_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="74dp"
+        android:text="@string/main_empty_list_text"
+        app:layout_anchor="@+id/swipe_container"
+        app:layout_anchorGravity="top|center" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

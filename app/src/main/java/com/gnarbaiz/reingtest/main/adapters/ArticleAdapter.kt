@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.gnarbaiz.reingtest.R
 import com.gnarbaiz.reingtest.networking.responses.Article
 import com.gnarbaiz.reingtest.utils.TimeAgoUtil
@@ -45,8 +44,8 @@ class ArticleAdapter(
         holder.tvDate.text = TimeAgoUtil.covertTimeToText(article.created_at)
 
         holder.itemView.setOnClickListener {
-            article._highlightResult.story_url?.let {
-                startWebViewActivity(it.value)
+            article.story_url?.let {
+                startWebViewActivity(it)
             }
         }
     }

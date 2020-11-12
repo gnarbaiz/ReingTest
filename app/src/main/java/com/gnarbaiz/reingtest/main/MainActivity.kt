@@ -40,10 +40,10 @@ class MainActivity : AppCompatActivity() {
         })
 
         mainActivityViewModel.getRequestArticles().observe(this, Observer {
-            loadAdapter(it.articlesList)
+            loadAdapter(ArrayList(it))
             hideLoader()
+            empty_list_text.visibility = View.GONE
         })
-
 
         // Scheme colors for animation
         swipeLayout.setColorSchemeColors(
@@ -53,10 +53,6 @@ class MainActivity : AppCompatActivity() {
                 resources.getColor(android.R.color.holo_red_light)
         )
         enableSwipeToDeleteAndUndo()
-    }
-
-    private fun loadList() {
-        hideLoader() //TODO("Not yet implemented")
     }
 
     private fun loadAdapter(articlesList : ArrayList<Article>) {
@@ -82,6 +78,7 @@ class MainActivity : AppCompatActivity() {
                 val position = viewHolder.adapterPosition
                 val item = articleAdapter.getData()[position]
                 articleAdapter.removeItem(position)
+                mainActivityViewModel.deleteArticle(item)
                 val snackbar: Snackbar = Snackbar
                     .make(
                         swipeLayout,
@@ -90,6 +87,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 snackbar.setAction("UNDO", View.OnClickListener {
                     articleAdapter.restoreItem(item, position)
+                    mainActivityViewModel.undoDeleteArticle(item)
                     articlesRecyclerView.scrollToPosition(position)
                 })
                 snackbar.setActionTextColor(Color.YELLOW)

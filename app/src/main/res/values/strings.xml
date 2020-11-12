@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReingTest</string>
+    <string name="main_empty_list_text">Swipe to load list</string>
 </resources>
